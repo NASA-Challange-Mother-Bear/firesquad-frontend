@@ -72,16 +72,28 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
+<<<<<<< HEAD
+=======
       "cordova-plugin-camera-preview": {},
+>>>>>>> 7212391295b6d123303468c50c5322758c3618d6
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
+<<<<<<< HEAD
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+=======
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
       "ios",
+>>>>>>> 7212391295b6d123303468c50c5322758c3618d6
       "android"
     ]
   }
