@@ -10,12 +10,15 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {Camera} from '@ionic-native/camera/ngx';
 import {CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions} from '@ionic-native/camera-preview/ngx';
+
 import { UserService } from './services/user.service';
 import { RequestUtilsService } from './services/request-utils.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './auth/auth.component';
+
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, AuthComponent],
     entryComponents: [],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
     providers: [
