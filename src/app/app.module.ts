@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 
@@ -14,13 +14,12 @@ import {CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, Camera
 import { UserService } from './services/user.service';
 import { RequestUtilsService } from './services/request-utils.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthComponent } from './auth/auth.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+
+
 
 
 @NgModule({
-    declarations: [AppComponent, AuthComponent, LoginComponent, RegisterComponent],
+    declarations: [AppComponent ],
     entryComponents: [],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
     providers: [
@@ -31,7 +30,10 @@ import { RegisterComponent } from './auth/register/register.component';
         RequestUtilsService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+    ]
 })
 export class AppModule {
 }
