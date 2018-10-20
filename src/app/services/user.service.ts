@@ -38,6 +38,7 @@ export class UserService {
       username, password
     }, this.requestUtils.requestOptions()).pipe(flatMap((response: { token: string }) => {
       setCookie('token', response.token);
+      this.requestUtils.token = response.token;
       setCookie('username', username);
       return this.getUserByUsername(username).pipe(map(user => {
         this.user = user;
