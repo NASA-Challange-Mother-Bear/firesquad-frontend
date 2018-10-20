@@ -36,7 +36,7 @@ export class HomePage implements OnInit {
       const bb = (this.contentRef.nativeElement as HTMLElement).getBoundingClientRect();
       const cameraPreviewOpts: CameraPreviewOptions = {
         x: 0,
-        y: 0,
+        y: window.screen.height - bb.height,
         width: bb.width,
         height: bb.height,
         camera: 'rear',
