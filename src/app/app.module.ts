@@ -15,10 +15,11 @@ import { UserService } from './services/user.service';
 import { RequestUtilsService } from './services/request-utils.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './auth/login/login.component';
 
 
 @NgModule({
-    declarations: [AppComponent, AuthComponent],
+    declarations: [AppComponent, AuthComponent, LoginComponent],
     entryComponents: [],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
     providers: [
