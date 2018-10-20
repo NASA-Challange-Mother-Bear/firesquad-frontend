@@ -9,6 +9,7 @@ import {LoginComponent} from './login/login.component';
 import {Log} from '@angular/core/testing/src/logger';
 import {UserService} from '../services/user.service';
 import {RequestUtilsService} from '../services/request-utils.service';
+import {RegisterComponent} from './register/register.component';
 
 @NgModule({
     imports: [
@@ -23,6 +24,10 @@ import {RequestUtilsService} from '../services/request-utils.service';
             {
                 path: 'login',
                 component: LoginComponent
+            },
+            {
+                path: 'register',
+                component: RegisterComponent
             }
         ])
     ],
@@ -30,7 +35,7 @@ import {RequestUtilsService} from '../services/request-utils.service';
         UserService,
         RequestUtilsService,
     ],
-    declarations: [AuthComponent, LoginComponent]
+    declarations: [AuthComponent, LoginComponent, RegisterComponent]
 })
 export class AuthPageModule {
 }
