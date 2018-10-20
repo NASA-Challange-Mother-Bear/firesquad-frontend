@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { getCookie, setCookie } from './request-utils';
+import { deleteCookie, getCookie, setCookie } from './request-utils';
 import { RequestUtilsService } from './request-utils.service';
 import { flatMap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -21,6 +21,7 @@ export class UserService {
   apiUrl = environment.apiUrl;
   user: User;
   awaitUser: Observable<void>;
+  isAuthenticatedChanged: EventEmitter<'online'|'offline'> = new EventEmitter();
 
   constructor(public http: HttpClient,
               public requestUtils: RequestUtilsService) {
@@ -32,7 +33,6 @@ export class UserService {
   }
 
   login(username: string, password: string) {
-    console.log(this.apiUrl + '/api-token-auth/');
     return this.http.post(this.apiUrl + '/api-token-auth/', {
       username, password
     }, this.requestUtils.requestOptions()).pipe(flatMap((response: { token: string }) => {
@@ -40,8 +40,21 @@ export class UserService {
       setCookie('username', username);
       return this.getUserByUsername(username).pipe(map(user => {
         this.user = user;
+        this.isAuthenticatedChanged.emit('online');
       }));
     }));
+  }
+
+  isAuthenticated() {
+    return this.requestUtils.token != null;
+  }
+
+  logout() {
+    deleteCookie('username');
+    deleteCookie('token');
+    this.user = null;
+    this.requestUtils.token = null;
+    this.isAuthenticatedChanged.emit('offline');
   }
 
   getUserByUsername(username: string) {

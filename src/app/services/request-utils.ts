@@ -21,3 +21,25 @@ export function getCookie(cname) {
   }
   return null;
 }
+
+export function deleteCookie(cname) {
+  const d = new Date(); // Create an date object
+  d.setTime(d.getTime() - (1000 * 60 * 60 * 24)); // Set the time to the past. 1000 milliseonds = 1 second
+  const expires = 'expires=' + d.toUTCString(); // Compose the expirartion date
+  window.document.cookie = cname + '=' + '; ' + expires; // Set the cookie with name and the expiration date
+
+}
+
+export interface GeoJSON {
+  geometry: any;
+  properties: any;
+  type: string;
+  id?: number;
+}
+
+export function geoJsonToModel<T>(geoJson: GeoJSON): T {
+  return {
+    ...geoJson.geometry,
+    ...geoJson.properties
+  } as T;
+}

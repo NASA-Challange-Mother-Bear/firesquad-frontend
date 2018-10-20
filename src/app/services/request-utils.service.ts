@@ -23,6 +23,9 @@ export class RequestUtilsService {
   }
 
   tokenRequestOptions() {
+    if (!this.token) {
+      throw new Error('No token, user is not authenticated');
+    }
     const headers = new HttpHeaders({
                                   'content-type': 'application/json',
                                   'accept': 'application/json;q=0.9,*/*;q=0.8',
