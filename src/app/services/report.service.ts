@@ -1,11 +1,10 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RequestUtilsService } from './request-utils.service';
-import { GeoJSON, geoJsonToModel, getCookie } from './request-utils';
+import { GeoJSON, geoJsonToModel } from './request-utils';
 import { map } from 'rxjs/operators';
-import { User, UserService } from './user.service';
+import { UserService } from './user.service';
 
 const reportTypeMapping = {
   'forest_fire': 0,

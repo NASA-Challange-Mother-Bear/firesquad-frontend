@@ -1,32 +1,32 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title>
-            Fire Squard
-        </ion-title>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-title>
+      Fire Squard
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-    <div style="height: 100%" #content>
-        <ion-fab margin-start margin-top vertical="top" horizontal="left" slot="fixed">
-            <ion-fab-button >
-                <ion-icon name="map"></ion-icon>
-            </ion-fab-button>
-         </ion-fab>
+  <div style="height: 100%" #content>
+    <ion-fab margin-start margin-top vertical="top" horizontal="left" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="map"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 
-         <ion-fab margin-end margin-top vertical="top" horizontal="end" slot="fixed">
-            <ion-fab-button >
-                <ion-icon name="notifications"></ion-icon>
-            </ion-fab-button>
-        </ion-fab>
+    <ion-fab margin-end margin-top vertical="top" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="notifications"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 
-        <ion-fab margin-bottom vertical="bottom" horizontal="center" slot="fixed">
-            <ion-fab-button (click)="onClick()">
-                <ion-icon name="add"></ion-icon>
-            </ion-fab-button>
-        </ion-fab>
-        <ion-img *ngIf="picture" [src]="picture"></ion-img>
-    </div>
+    <ion-fab margin-bottom vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="onClick()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-img *ngIf="picture" [src]="picture"></ion-img>
+  </div>
 
 </ion-content>

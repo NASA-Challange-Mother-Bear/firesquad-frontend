@@ -7,15 +7,16 @@ import { getCookie } from './request-utils';
 })
 export class RequestUtilsService {
   token: string;
+
   constructor() {
     this.token = getCookie('token');
   }
 
   requestOptions() {
     const headers = new HttpHeaders({
-                                      'content-type': 'application/json',
-                                      'accept': 'application/json;q=0.9,*/*;q=0.8',
-                                    });
+      'content-type': 'application/json',
+      'accept': 'application/json;q=0.9,*/*;q=0.8',
+    });
     return {
       headers: headers,
       withCredentials: true,
@@ -27,10 +28,10 @@ export class RequestUtilsService {
       throw new Error('No token, user is not authenticated');
     }
     const headers = new HttpHeaders({
-                                  'content-type': 'application/json',
-                                  'accept': 'application/json;q=0.9,*/*;q=0.8',
-                                  'authorization': 'JWT ' + this.token,
-                                });
+      'content-type': 'application/json',
+      'accept': 'application/json;q=0.9,*/*;q=0.8',
+      'authorization': 'JWT ' + this.token,
+    });
     return {
       headers: headers,
       withCredentials: true,

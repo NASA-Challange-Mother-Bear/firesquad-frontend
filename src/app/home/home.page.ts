@@ -1,20 +1,15 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import {
-  CameraPreview,
-  CameraPreviewPictureOptions,
-  CameraPreviewOptions,
-  CameraPreviewDimensions
-} from '@ionic-native/camera-preview/ngx';
+import { CameraPreview, CameraPreviewOptions, CameraPreviewPictureOptions } from '@ionic-native/camera-preview/ngx';
 import { UserService } from '../services/user.service';
 import { ReportService } from '../services/report.service';
 
 
 @Component({
-             selector: 'app-home',
-             templateUrl: 'home.page.html',
-             styleUrls: ['home.page.scss'],
-           })
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+})
 export class HomePage implements OnInit {
   cameraPreviewOpts: CameraPreviewOptions = {
     x: 0,
@@ -27,7 +22,7 @@ export class HomePage implements OnInit {
     toBack: true,
     alpha: 1
   };
-    @ViewChild('content') contentRef: ElementRef;
+  @ViewChild('content') contentRef: ElementRef;
   private picture: string;
 
   constructor(public platform: Platform,
@@ -62,7 +57,6 @@ export class HomePage implements OnInit {
           });
       });
     }, 0);
-
   }
 
   onClick() {
@@ -74,7 +68,7 @@ export class HomePage implements OnInit {
 
     this.cameraPreview.takePicture(pictureOpts).then((imageData) => {
       this.picture = 'data:image/jpeg;base64,' + imageData;
-      this.reportService.postReport('forest_fire', [0, 0], [this.picture])  ;
+      this.reportService.postReport('forest_fire', [0, 0], [this.picture]);
     }, (err) => {
       console.log(err);
       this.picture = 'assets/img/test.jpg';

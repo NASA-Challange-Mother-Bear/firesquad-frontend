@@ -1,0 +1,29 @@
+<ion-content>
+  <div style="margin-top: 50%">
+    <ion-img style="width:200px;height:200px;width: auto;margin: auto;display: block;"
+             src="src/assets/icon/logo.svg"></ion-img>
+  </div>
+
+  <div margin-top="50px">
+
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input [(ngModel)]="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input [(ngModel)]="password" type="password"></ion-input>
+    </ion-item>
+  </div>
+
+
+  <!--<ion-button shape="round" color="primary" fill="outline">Log-in!</ion-button>-->
+  <div style="height: 100%">
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-button style="--background:#B2CE77;" (click)="loginForm()">Log-in!</ion-button>
+    </ion-fab>
+
+  </div>
+
+
+</ion-content>
