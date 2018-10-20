@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions} from '@ionic-native/camera-preview/ngx';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -22,7 +23,13 @@ export class HomePage implements OnInit {
     };
     private picture: string;
 
-    constructor(private cameraPreview: CameraPreview) {
+    constructor(private cameraPreview: CameraPreview,
+                public userService: UserService) {
+        if (this.userService.awaitUser || this.userService.user) {
+
+        } else {
+            this.userService.login('roadd', 'garfield98').subscribe(() => {});
+        }
     }
 
     ngOnInit(): void {
