@@ -27,6 +27,7 @@ export class UserService {
     if (requestUtils.token) {
       this.awaitUser = this.getUserByUsername(getCookie('username')).pipe(map(user => {
         this.user = user;
+        this.awaitUser = null;
       }));
     }
   }
@@ -40,6 +41,7 @@ export class UserService {
       setCookie('username', username);
       return this.getUserByUsername(username).pipe(map(user => {
         this.user = user;
+        return user;
       }));
     }));
   }

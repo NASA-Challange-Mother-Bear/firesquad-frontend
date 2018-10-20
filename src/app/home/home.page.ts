@@ -25,11 +25,11 @@ export class HomePage implements OnInit {
 
     constructor(private cameraPreview: CameraPreview,
                 public userService: UserService) {
-        if (this.userService.awaitUser || this.userService.user) {
-
-        } else {
-            this.userService.login('roadd', 'garfield98').subscribe(() => {});
-        }
+        // if (this.userService.awaitUser || this.userService.user) {
+        //
+        // } else {
+        //     this.userService.login('roadd', 'garfield98').subscribe(() => {});
+        // }
     }
 
     ngOnInit(): void {
