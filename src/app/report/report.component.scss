@@ -5,3 +5,19 @@ font-weight: normal;
 line-height: 16px;
 font-size: 12px;
 }
+
+ion-fab-button.processing {
+  --background: orange;
+}
+
+ion-fab-button.rejected {
+  --background: var(--ion-color-danger);
+}
+
+ion-fab-button.accepted {
+  --background: var(--ion-color-primary);
+}
+
+ion-col ion-card {
+  margin: 10px 8px;
+}

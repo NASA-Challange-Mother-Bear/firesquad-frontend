@@ -1,32 +1,32 @@
 <ion-content>
-  <div style="height: 100%">
-    <ion-grid justify-content-between class="flex column">
-      <ion-row>
-        <ion-col>
-          <ion-img src="assets/icon/logo.svg" class="logo"></ion-img>
-          <p class="motto">Log in</p>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Username</ion-label>
-            <ion-input [(ngModel)]="username"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Password</ion-label>
-            <ion-input [(ngModel)]="password" type="password"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col text-center>
-          <ion-button style="--background:#B2CE77;" firesquad (click)="loginForm()">Log-in!</ion-button>
-          <p>Don’t have an account? <a routerLink="/auth/register">Register here</a></p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+    <div style="height: 100%">
+        <ion-grid justify-content-between class="flex column">
+            <ion-row>
+                <ion-col>
+                    <ion-img src="assets/icon/logo.svg" class="logo"></ion-img>
+                    <p class="motto">Log in</p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">Username</ion-label>
+                        <ion-input [(ngModel)]="username"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Password</ion-label>
+                        <ion-input [(ngModel)]="password" type="password"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col text-center>
+                    <ion-button style="--background:#B2CE77;" firesquad (click)="loginForm()">Log-in!</ion-button>
+                    <p>Don’t have an account? <a routerLink="/auth/register">Register here</a></p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 </ion-content>
 
 

@@ -48,12 +48,12 @@ export class ReportService {
         });
     }
 
-    getReportbyUser(userID: number): Promise<any> {
+    getReportbyUser(userID: number, type:number): Promise<any> {
         if (!this.userService.isAuthenticated()) {
             return Promise.reject({error: 'User logged of'});
         }
 
-        return this.http.get(this.apiUrl + '/api/report?user=' + userID + '&type=0',
+        return this.http.get(this.apiUrl + '/api/report?user=' + userID + '&type='+type,
             this.requestUtil.tokenRequestOptions()).toPromise().then((reports: GeoJSONArray) => {
             return reports.features.map(report => geoJsonToModel<Report>(report));
         });
