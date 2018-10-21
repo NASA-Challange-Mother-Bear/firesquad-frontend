@@ -10,7 +10,9 @@ import {getCookie} from '../services/request-utils';
     styleUrls: ['./report.component.scss']
 })
 export class ReportComponent implements OnInit {
-    public reports = null;
+    public reportsForestFire = null;
+    public reportsHazardFire = null;
+    public page = 0;
 
     constructor(public userSerice: UserService,
                 public reportSerice: ReportService,
@@ -19,9 +21,15 @@ export class ReportComponent implements OnInit {
 
     ngOnInit() {
         setTimeout(() => {
-            this.reportSerice.getReportbyUser(this.userSerice.user.id).then((data) => {
-                this.reports = data;
-                console.log(this.reports);
+            this.reportSerice.getReportbyUser(this.userSerice.user.id, 0).then((data) => {
+                this.reportsForestFire = data;
+                console.log(this.reportsForestFire);
+            });
+        });
+        setTimeout(() => {
+            this.reportSerice.getReportbyUser(this.userSerice.user.id, 1).then((data) => {
+                this.reportsHazardFire = data;
+                console.log(this.reportsHazardFire);
             });
         });
 
@@ -42,5 +50,14 @@ export class ReportComponent implements OnInit {
 
     getIcon(status) {
         return status === 0 ? 'infinite' : (status === 1 ? 'close' : 'checkmark');
+    }
+
+    onChangeScreen(option: string) {
+        if (option === 'fire') {
+            this.page = 0;
+        }
+        if (option === 'hazard') {
+            this.page = 1;
+        }
     }
 }

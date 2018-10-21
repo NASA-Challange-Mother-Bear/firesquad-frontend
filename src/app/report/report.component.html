@@ -3,16 +3,73 @@
         <ion-title>
             Your reports
         </ion-title>
+
+
     </ion-toolbar>
+    <ion-row>
+        <ion-col text-center>
+            <ion-button size="small" (click)="onChangeScreen('fire')">Forest fire</ion-button>
+            <ion-button size="small" (click)="onChangeScreen('hazard')">Hazard fire</ion-button>
+        </ion-col>
+
+    </ion-row>
 </ion-header>
 
 
-<ion-content>
+<ion-content *ngIf="this.page==0">
 
     <ion-grid>
 
         <ion-row>
-            <ion-col size="6" *ngFor="let report of reports">
+            <ion-col size="6" *ngFor="let report of reportsForestFire">
+                <ion-card>
+                    <div style="position: relative">
+                        <ion-img src="assets/icon/cover_fire.png"></ion-img>
+                        <ion-fab vertical="bottom" horizontal="end" edge slot="fixed">
+                            <ion-fab-button [class]="getColor(report.status)" mini>
+                                <ion-icon name="{{getIcon(report.status)}}"></ion-icon>
+                            </ion-fab-button>
+                        </ion-fab>
+
+                    </div>
+
+                    <ion-card-content>
+                        <div>
+
+                            <div>
+                                <!--<ion-icon name='time' item-start></ion-icon>-->
+                                <img style="width: 10px;height: 10px" src="assets/icon/data-icon-black.svg">
+                                <p>{{ parseDate(report.timestamp)}} </p>
+                            </div>
+
+                        </div>
+
+                        <div>
+
+                            <div>
+                                <!--<ion-icon name='pin' item-start></ion-icon>-->
+                                <img style="width: 10px;height: 10px" src="assets/icon/pin-icon-black.svg">
+                                <p>{{ parseCoord(report.coordinates[0])}} {{ parseCoord(report.coordinates[1]) }}</p>
+                            </div>
+
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+
+
+        </ion-row>
+    </ion-grid>
+
+
+</ion-content>
+
+<ion-content *ngIf="this.page==1">
+
+    <ion-grid>
+
+        <ion-row>
+            <ion-col size="6" *ngFor="let report of reportsHazardFire">
                 <ion-card>
                     <div style="position: relative">
                         <ion-img src="assets/icon/cover_fire.png"></ion-img>
