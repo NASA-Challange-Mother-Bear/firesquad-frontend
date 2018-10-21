@@ -68,7 +68,7 @@ export class HomePage implements OnInit {
 
     this.cameraPreview.takePicture(pictureOpts).then((imageData) => {
       this.picture = 'data:image/jpeg;base64,' + imageData;
-      this.reportService.postReport('forest_fire', [0, 0], [this.picture]);
+      this.reportService.postReport('forest_fire', [0, 0], this.picture);
     }, (err) => {
       console.log(err);
       this.picture = 'assets/img/test.jpg';
