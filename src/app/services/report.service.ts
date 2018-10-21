@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {RequestUtilsService} from './request-utils.service';
-import {GeoJSON, geoJsonToModel} from './request-utils';
+import {GeoJSON, GeoJSONArray, geoJsonToModel} from './request-utils';
 import {map} from 'rxjs/operators';
 import {UserService} from './user.service';
 
@@ -53,9 +53,9 @@ export class ReportService {
             return Promise.reject({error: 'User logged of'});
         }
 
-        this.http.get(this.apiUrl + '/api/report?user=' + userID,
-            this.requestUtil.tokenRequestOptions()).toPromise().then((report: GeoJSON) => {
-            return geoJsonToModel<Report>(report);
+        return this.http.get(this.apiUrl + '/api/report?user=' + userID + '&type=0',
+            this.requestUtil.tokenRequestOptions()).toPromise().then((reports: GeoJSONArray) => {
+            return reports.features.map(report => geoJsonToModel<Report>(report));
         });
     }
 

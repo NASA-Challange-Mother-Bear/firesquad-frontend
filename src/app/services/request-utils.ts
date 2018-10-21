@@ -30,6 +30,11 @@ export function deleteCookie(cname) {
 
 }
 
+export interface GeoJSONArray {
+  type: string;
+  features: GeoJSON[];
+}
+
 export interface GeoJSON {
   geometry: any;
   properties: any;
