@@ -37,7 +37,10 @@ export class ReportService {
   }
 
   postReport(type: ReportType, geolocation: Point, photos: Array<string>) {
-    this.http.post(this.apiUrl + '/api/report/', {
+  console.log(type);
+  console.log(geolocation);
+  console.log(photos);
+    this.http.post(this.apiUrl + '/api/report_post/', {
       user: this.userService.user.id,
       geolocation,
       type,
