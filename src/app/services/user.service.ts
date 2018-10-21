@@ -1,10 +1,10 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { EventEmitter, Injectable, Injector } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { deleteCookie, getCookie, setCookie } from './request-utils';
 import { RequestUtilsService } from './request-utils.service';
-import { flatMap, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { catchError, flatMap, map } from 'rxjs/operators';
+import { never, Observable } from 'rxjs';
 
 export interface User {
   url: string;
@@ -55,8 +55,6 @@ export class UserService {
       setCookie('username', username);
       return this.getUserByUsername(username).then(user => {
         this.user = user;
-
-        console.log("Ceva", user, this.user)
         this.isAuthenticatedChanged.emit('online');
         return user;
       });
@@ -86,5 +84,29 @@ export class UserService {
       .toPromise().then((users: Array<User>) => {
         return users[0];
       });
+  }
+}
+
+
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  constructor(public userService: UserService) {
+  }
+
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    return next
+      .handle(request)
+      .pipe(catchError((error, obs) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 401) {
+            this.userService.logout();
+            return never();
+          }
+        }
+        throw error;
+      })) as any;
   }
 }
