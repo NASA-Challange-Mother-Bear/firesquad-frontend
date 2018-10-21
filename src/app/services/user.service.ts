@@ -91,8 +91,8 @@ export class UserService {
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(public userService: UserService,
-  public router: Router) {
+
+  constructor(private injector: Injector) {
   }
 
   intercept(
@@ -102,10 +102,13 @@ export class AuthInterceptor implements HttpInterceptor {
     return next
       .handle(request)
       .pipe(catchError((error, obs) => {
+        const userService: UserService = this.injector.get(UserService);
+        const router: Router = this.injector.get(Router);
+
         if (error instanceof HttpErrorResponse) {
           if (error.status === 401) {
-            this.userService.logout();
-            this.router.navigate(['/auth']);
+            userService.logout();
+            router.navigate(['/auth']);
             return of(error);
           }
         }
@@ -113,3 +116,4 @@ export class AuthInterceptor implements HttpInterceptor {
       })) as any;
   }
 }
+

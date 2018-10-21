@@ -6,8 +6,6 @@ import { RouterModule } from '@angular/router';
 
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
-import { UserService } from '../services/user.service';
-import { RequestUtilsService } from '../services/request-utils.service';
 import { RegisterComponent } from './register/register.component';
 
 @NgModule({
