@@ -3,7 +3,7 @@ import { Platform } from '@ionic/angular';
 import { CameraPreview, CameraPreviewOptions, CameraPreviewPictureOptions } from '@ionic-native/camera-preview/ngx';
 import { UserService } from '../services/user.service';
 import { ReportService } from '../services/report.service';
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -26,6 +26,7 @@ export class HomePage implements OnInit {
 
   constructor(public platform: Platform,
               public cameraPreview: CameraPreview,
+              public geolocation: Geolocation,
               public userService: UserService,
               public reportService: ReportService) {
   }
@@ -67,11 +68,7 @@ export class HomePage implements OnInit {
 
     this.cameraPreview.takePicture(pictureOpts).then((imageData) => {
       this.picture = 'data:image/jpeg;base64,' + imageData;
-      navigator.geolocation.getCurrentPosition((resp) => {
-        // resp.coords.latitude
-        // resp.coords.longitud
-        this.reportService.postReport(type, [resp.coords.latitude, resp.coords.longitude], this.picture);
-      });
+      this.reportService.postReport(type, [0, 0], this.picture);
     }, (err) => {
       console.log(err);
       this.picture = 'assets/img/test.jpg';

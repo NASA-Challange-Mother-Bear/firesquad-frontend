@@ -15,6 +15,7 @@ import { AuthInterceptor, UserService } from './services/user.service';
 import { RequestUtilsService } from './services/request-utils.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReportService } from './services/report.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { ReportService } from './services/report.service';
   providers: [
     StatusBar,
     SplashScreen,
-    Camera, CameraPreview, Platform,
+    Camera, CameraPreview, Platform, Geolocation,
     UserService,
     RequestUtilsService,
     ReportService,
