@@ -11,9 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { Camera } from '@ionic-native/camera/ngx';
 import { CameraPreview } from '@ionic-native/camera-preview/ngx';
 
-import { UserService } from './services/user.service';
+import { AuthInterceptor, UserService } from './services/user.service';
 import { RequestUtilsService } from './services/request-utils.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReportService } from './services/report.service';
 
 
@@ -28,6 +28,7 @@ import { ReportService } from './services/report.service';
     UserService,
     RequestUtilsService,
     ReportService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
