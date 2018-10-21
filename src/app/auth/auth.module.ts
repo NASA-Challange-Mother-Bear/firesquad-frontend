@@ -30,10 +30,6 @@ import { RegisterComponent } from './register/register.component';
       }
     ])
   ],
-  providers: [
-    UserService,
-    RequestUtilsService,
-  ],
   declarations: [AuthComponent, LoginComponent, RegisterComponent]
 })
 export class AuthPageModule {

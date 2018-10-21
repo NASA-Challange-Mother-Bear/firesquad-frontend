@@ -20,16 +20,16 @@ export interface User {
 export class UserService {
   apiUrl = environment.apiUrl;
   user: User;
-  awaitUser: Observable<void>;
+  awaitUser: Promise<void>;
   isAuthenticatedChanged: EventEmitter<'online' | 'offline'> = new EventEmitter();
 
   constructor(public http: HttpClient,
               public requestUtils: RequestUtilsService) {
     if (requestUtils.token) {
-      this.awaitUser = this.getUserByUsername(getCookie('username')).pipe(map(user => {
+      this.awaitUser = this.getUserByUsername(getCookie('username')).then(user => {
         this.user = user;
         this.awaitUser = null;
-      }));
+      });
     }
   }
 
@@ -49,16 +49,18 @@ export class UserService {
     console.log(this.apiUrl + '/api-token-auth/');
     return this.http.post(this.apiUrl + '/api-token-auth/', {
       username, password
-    }, this.requestUtils.requestOptions()).pipe(flatMap((response: { token: string }) => {
+    }, this.requestUtils.requestOptions()).toPromise().then((response: { token: string }) => {
       setCookie('token', response.token);
       this.requestUtils.token = response.token;
       setCookie('username', username);
-      return this.getUserByUsername(username).pipe(map(user => {
+      return this.getUserByUsername(username).then(user => {
         this.user = user;
+
+        console.log("Ceva", user, this.user)
         this.isAuthenticatedChanged.emit('online');
         return user;
-      }));
-    }));
+      });
+    });
   }
 
   register(username: string, email: string, password: string) {
@@ -67,7 +69,7 @@ export class UserService {
       'username': username,
       'password': password,
       'email': email
-    }, this.requestUtils.requestOptions()).pipe(map((data: {
+    }, this.requestUtils.requestOptions()).toPromise().then((data: {
       user: User,
       token: string
     }) => {
@@ -75,13 +77,14 @@ export class UserService {
       setCookie('username', this.user.username);
       this.requestUtils.token = data.token;
       setCookie('token', this.requestUtils.token);
-    }));
+      this.isAuthenticatedChanged.emit('online');
+    });
   }
 
   getUserByUsername(username: string) {
     return this.http.get(this.apiUrl + `/api/user/?username=${username}`, this.requestUtils.tokenRequestOptions())
-      .pipe(map((users: Array<User>) => {
+      .toPromise().then((users: Array<User>) => {
         return users[0];
-      }));
+      });
   }
 }

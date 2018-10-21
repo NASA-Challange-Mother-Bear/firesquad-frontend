@@ -1,8 +1,10 @@
+
 import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {catchError} from 'rxjs/operators';
 import {empty, Observable, EMPTY} from 'rxjs';
 import {Router} from '@angular/router';
+
 
 @Component({
     selector: 'app-register',
@@ -21,8 +23,6 @@ export class RegisterComponent implements OnInit {
                 public router: Router) {
     }
 
-    ngOnInit() {
-    }
 
     onRegister() {
         if (this.username && this.password && this.retype_password && this.email) {
@@ -31,17 +31,13 @@ export class RegisterComponent implements OnInit {
             console.log(this.password === this.retype_password);
             if (this.password === this.retype_password) {
 
-                this.userService.register(this.username, this.email, this.password).pipe(catchError((error, obs) => {
-                    console.log(error);
-                    if (!error) {
-                        return obs;
-                    } else {
-                        this.error = error;
-                        return EMPTY;
-                    }
-                }))
-                    .subscribe((user) => {
+                this.userService.register(this.username, this.email, this.password)
+                    .then((user) => {
                         this.router.navigate(['home']);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        this.error = error;
                     });
             }
 
@@ -49,4 +45,6 @@ export class RegisterComponent implements OnInit {
 
     }
 
+    ngOnInit(): void {
+    }
 }

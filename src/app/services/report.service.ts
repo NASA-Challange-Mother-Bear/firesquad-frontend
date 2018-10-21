@@ -43,11 +43,11 @@ export class ReportService {
     this.http.post(this.apiUrl + '/api/report_post/', {
       user: this.userService.user.id,
       geolocation,
-      type,
+      type: reportTypeMapping[type],
       photos
-    }, this.requestUtil.tokenRequestOptions()).pipe(map((report: GeoJSON) => {
+    }, this.requestUtil.tokenRequestOptions()).toPromise().then((report: GeoJSON) => {
       return geoJsonToModel<Report>(report);
-    }));
+    });
   }
 
 }
