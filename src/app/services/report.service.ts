@@ -29,6 +29,7 @@ export interface Report {
     providedIn: 'root'
 })
 export class ReportService {
+
     apiUrl = environment.apiUrl;
 
     constructor(public http: HttpClient,
@@ -60,5 +61,6 @@ export class ReportService {
             return geoJsonToModel<Report>(report);
         });
     }
+
 
 }
