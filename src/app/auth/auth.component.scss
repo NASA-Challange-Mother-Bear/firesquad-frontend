@@ -32,3 +32,8 @@
 ion-grid {
   height: 100%;
 }
+
+ion-router-outlet > *:not(app-home) {
+
+  --ion-background-color: white;
+}

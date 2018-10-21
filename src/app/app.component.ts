@@ -22,11 +22,11 @@ export class AppComponent {
     if (!this.userService.isAuthenticated()) {
       router.navigate(['auth']);
     }
-    this.userService.isAuthenticatedChanged.subscribe((state) => {
-      if (state === 'offline') {
-        router.navigate(['auth']);
-      }
-    });
+    // this.userService.isAuthenticatedChanged.subscribe((state) => {
+    //   if (state === 'offline') {
+    //     router.navigate(['auth']);
+    //   }
+    // });
   }
 
   initializeApp() {

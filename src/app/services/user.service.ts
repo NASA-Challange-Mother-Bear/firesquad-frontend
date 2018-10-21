@@ -4,7 +4,8 @@ import { environment } from '../../environments/environment';
 import { deleteCookie, getCookie, setCookie } from './request-utils';
 import { RequestUtilsService } from './request-utils.service';
 import { catchError, flatMap, map } from 'rxjs/operators';
-import { never, Observable } from 'rxjs';
+import { never, Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 export interface User {
   url: string;
@@ -90,7 +91,8 @@ export class UserService {
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(public userService: UserService) {
+  constructor(public userService: UserService,
+  public router: Router) {
   }
 
   intercept(
@@ -103,7 +105,8 @@ export class AuthInterceptor implements HttpInterceptor {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 401) {
             this.userService.logout();
-            return never();
+            this.router.navigate(['/auth']);
+            return of();
           }
         }
         throw error;
