@@ -37,15 +37,12 @@ export class ReportService {
                 public requestUtil: RequestUtilsService) {
     }
 
-    postReport(type: ReportType, geolocation: Point, photos: Array<string>) {
-        console.log(type);
-        console.log(geolocation);
-        console.log(photos);
+    postReport(type: ReportType, geolocation: Point, photo: string) {
         this.http.post(this.apiUrl + '/api/report_post/', {
             user: this.userService.user.id,
             geolocation,
             type: reportTypeMapping[type],
-            photos
+            photo: photo
         }, this.requestUtil.tokenRequestOptions()).toPromise().then((report: GeoJSON) => {
             return geoJsonToModel<Report>(report);
         });
