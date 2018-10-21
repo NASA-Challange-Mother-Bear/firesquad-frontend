@@ -15,8 +15,8 @@
                     <div style="position: relative">
                         <ion-img src="assets/icon/cover_fire.png"></ion-img>
                         <ion-fab vertical="bottom" horizontal="end" edge slot="fixed">
-                            <ion-fab-button mini>
-                                <ion-icon name="add"></ion-icon>
+                            <ion-fab-button [class]="getColor(report.status)" mini>
+                                <ion-icon name="{{getIcon(report.status)}}"></ion-icon>
                             </ion-fab-button>
                         </ion-fab>
 

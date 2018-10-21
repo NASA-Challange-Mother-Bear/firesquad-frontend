@@ -36,4 +36,11 @@ export class ReportComponent implements OnInit {
         return coord.toFixed(3);
     }
 
+    getColor(status) {
+        return status === 0 ? 'processing' : (status === 1 ? 'rejected' : 'accepted');
+    }
+
+    getIcon(status) {
+        return status === 0 ? 'infinite' : (status === 1 ? 'close' : 'checkmark');
+    }
 }
