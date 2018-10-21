@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {catchError} from 'rxjs/operators';
 import {empty, Observable, EMPTY} from 'rxjs';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-register',
@@ -27,18 +27,24 @@ export class RegisterComponent implements OnInit {
     onRegister() {
         if (this.username && this.password && this.retype_password && this.email) {
             console.log('go register');
-            this.userService.register(this.username, this.email, this.password).pipe(catchError((error, obs) => {
-                console.log(error);
-                if (!error) {
-                    return obs;
-                } else {
-                    this.error = error;
-                    return EMPTY;
-                }
-            }))
-                .subscribe((user) => {
-                    this.router.navigate(['home']);
-                });
+            console.log(this.username, this.password, this.retype_password, this.email);
+            console.log(this.password === this.retype_password);
+            if (this.password === this.retype_password) {
+
+                this.userService.register(this.username, this.email, this.password).pipe(catchError((error, obs) => {
+                    console.log(error);
+                    if (!error) {
+                        return obs;
+                    } else {
+                        this.error = error;
+                        return EMPTY;
+                    }
+                }))
+                    .subscribe((user) => {
+                        this.router.navigate(['home']);
+                    });
+            }
+
         }
 
     }
