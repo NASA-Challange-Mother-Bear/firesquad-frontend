@@ -22,11 +22,16 @@
     </ion-fab>
 
     <ion-fab margin-bottom vertical="bottom" horizontal="center" slot="fixed">
-      <button firesquad (click)="onClick()">
-        <ion-icon name="notifications-outline" style="--background: white; --ion-color-base: white"></ion-icon>
-      </button>
-      <ion-fab-list>
-
+      <ion-fab-button>
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="end">
+        <ion-fab-button (click)="onClick('forest_fire')" class="ion-color-danger">
+          <ion-icon name="flame"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="onClick('fire_hazard')" style="--ion-color-base:#B2CE77; --ion-color-contrast: white;">
+          <ion-icon name="bonfire"></ion-icon>
+        </ion-fab-button>
       </ion-fab-list>
     </ion-fab>
     <ion-img *ngIf="picture" [src]="picture"></ion-img>
