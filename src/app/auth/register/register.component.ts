@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {catchError} from 'rxjs/operators';
 import {empty, Observable, EMPTY} from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-register',
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
     public error = null;
 
 
-    constructor(public userService: UserService) {
+    constructor(public userService: UserService,
+                public router: Router) {
     }
 
     ngOnInit() {
@@ -35,8 +37,7 @@ export class RegisterComponent implements OnInit {
                 }
             }))
                 .subscribe((user) => {
-                    this.error = undefined;
-                    console.log('registrat');
+                    this.router.navigate(['home']);
                 });
         }
 
