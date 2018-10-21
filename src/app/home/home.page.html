@@ -1,19 +1,19 @@
-<ion-content>
+<ion-content style="--background: transparent">
   <div style="height: 100%" #content>
     <ion-fab margin-start margin-top vertical="top" horizontal="left" slot="fixed">
-      <ion-fab-button>
-        <ion-icon name="map"></ion-icon>
+      <ion-fab-button (click)="logout()">
+        <ion-icon name="arrow-back"></ion-icon>
       </ion-fab-button>
     </ion-fab>
 
     <ion-fab margin-end margin-top vertical="top" horizontal="end" slot="fixed">
-      <ion-fab-button>
+      <ion-fab-button routerLink="/report">
         <ion-icon name="notifications"></ion-icon>
       </ion-fab-button>
     </ion-fab>
 
     <ion-fab margin-bottom vertical="bottom" horizontal="center" slot="fixed">
-      <ion-fab-button>
+      <ion-fab-button (click)="takePhoto()">
         <ion-icon name="notifications-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-list side="end">

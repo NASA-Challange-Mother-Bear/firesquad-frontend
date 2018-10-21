@@ -1,15 +1,18 @@
 <ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button routerLink="/home">
+                <ion-icon name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title>
             Your reports
         </ion-title>
-
-
     </ion-toolbar>
-    <ion-row>
+    <ion-row style="background: white">
         <ion-col text-center>
-            <ion-button size="small" (click)="onChangeScreen('fire')">Forest fire</ion-button>
-            <ion-button size="small" (click)="onChangeScreen('hazard')">Hazard fire</ion-button>
+            <ion-button size="small" (click)="onChangeScreen('fire')">Reported forest fires</ion-button>
+            <ion-button size="small" (click)="onChangeScreen('hazard')">Reported fire hazards</ion-button>
         </ion-col>
 
     </ion-row>

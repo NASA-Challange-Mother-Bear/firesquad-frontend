@@ -4,6 +4,7 @@ import { CameraPreview, CameraPreviewOptions, CameraPreviewPictureOptions } from
 import { UserService } from '../services/user.service';
 import { ReportService } from '../services/report.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -28,6 +29,7 @@ export class HomePage implements OnInit {
               public cameraPreview: CameraPreview,
               public geolocation: Geolocation,
               public userService: UserService,
+              public router: Router,
               public reportService: ReportService) {
   }
 
@@ -59,20 +61,33 @@ export class HomePage implements OnInit {
     }, 0);
   }
 
-  onClick(type) {
-    const pictureOpts: CameraPreviewPictureOptions = {
-      width: 1280,
-      height: 1280,
-      quality: 85
-    };
+  takePhoto() {
+    if (!this.picture) {
+      const pictureOpts: CameraPreviewPictureOptions = {
+        width: 1280,
+        height: 1280,
+        quality: 85
+      };
 
-    this.cameraPreview.takePicture(pictureOpts).then((imageData) => {
-      this.picture = 'data:image/jpeg;base64,' + imageData;
-      this.reportService.postReport(type, [0, 0], this.picture);
-    }, (err) => {
-      console.log(err);
-      this.picture = 'assets/img/test.jpg';
-    });
+      this.cameraPreview.takePicture(pictureOpts).then((imageData) => {
+        this.picture = 'data:image/jpeg;base64,' + imageData;
+      }, (err) => {
+        console.log(err);
+        this.picture = 'assets/img/test.jpg';
+      });
+    } else {
+      this.picture = null;
+    }
+  }
+
+  onClick(type) {
+    this.reportService.postReport(type, [0, 0], this.picture);
+    this.picture = null;
+  }
+
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/auth']);
   }
 
 }

@@ -1,9 +1,9 @@
-.report-details{
+.report-details {
   font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-line-height: 16px;
-font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 16px;
+  font-size: 12px;
 }
 
 ion-fab-button.processing {
@@ -19,5 +19,7 @@ ion-fab-button.accepted {
 }
 
 ion-col ion-card {
-  margin: 10px 8px;
+  margin: 0 0;
+  box-shadow: unset;
+  border: 1px solid lightgray;
 }
