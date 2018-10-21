@@ -19,10 +19,6 @@ import {RouterModule} from '@angular/router';
             }
         ])
     ],
-    providers: [
-        UserService,
-        RequestUtilsService,
-    ],
     declarations: [ReportComponent]
 })
 export class ReportModule {
